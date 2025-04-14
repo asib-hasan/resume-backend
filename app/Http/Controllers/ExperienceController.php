@@ -12,7 +12,7 @@ class ExperienceController extends Controller
     {
         return response()->json([
             'status' => 'success',
-            'data' => (Experience::all())
+            'data' => (Experience::orderBy('sort_order')->get())
         ], 200);
     }
 
