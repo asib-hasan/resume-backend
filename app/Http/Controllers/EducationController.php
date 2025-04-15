@@ -28,6 +28,7 @@ class EducationController extends Controller
             'field_of_study' => 'required|max:255',
             'start_date' => 'required|date',
             'end_date' => 'nullable|date|after_or_equal:start_date',
+            'result' => 'required|max:10',
         ]);
         $total_education = Education::count();
         try {
@@ -40,6 +41,7 @@ class EducationController extends Controller
                     'field_of_study' => $validated['field_of_study'],
                     'start_date' => $validated['start_date'],
                     'end_date' => $validated['end_date'],
+                    'result' => $validated['result'],
                     'sort_order' => $total_education + 1,
                 ]);
             });
@@ -70,6 +72,7 @@ class EducationController extends Controller
             'field_of_study' => 'required|max:255',
             'start_date' => 'required|date',
             'end_date' => 'nullable|date|after_or_equal:start_date',
+            'result' => 'required|max:10',
         ]);
 
         try {
@@ -81,6 +84,7 @@ class EducationController extends Controller
                     'field_of_study' => $validated['field_of_study'],
                     'start_date' => $validated['start_date'],
                     'end_date' => $validated['end_date'],
+                    'result' => $validated['result'],
                 ]);
             });
 

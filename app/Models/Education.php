@@ -14,6 +14,7 @@ class Education extends Model
         'field_of_study',
         'start_date',
         'end_date',
+        'result',
     ];
 
     protected $hidden = [
