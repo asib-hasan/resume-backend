@@ -21,7 +21,7 @@ class SkillsController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|max:255',
+            'title' => 'required|max:255',
             'level' => 'required|max:100',
         ]);
 
@@ -30,7 +30,7 @@ class SkillsController extends Controller
         try {
             DB::transaction(function () use ($validated, $total_skills) {
                 Skill::create([
-                    'name' => $validated['name'],
+                    'title' => $validated['title'],
                     'level' => $validated['level'],
                     'sort_order' => $total_skills + 1,
                 ]);
@@ -50,21 +50,21 @@ class SkillsController extends Controller
     // Update skill
     public function update(Request $request, $id)
     {
-        $skill = Skill::find($id);
+        $skill = Skill::where('id',$id)->first();
 
         if (!$skill) {
             return response()->json(['message' => 'Skill not found'], 404);
         }
 
         $validated = $request->validate([
-            'name' => 'required|max:255',
+            'title' => 'required|max:255',
             'level' => 'required|max:100',
         ]);
 
         try {
             DB::transaction(function () use ($skill, $validated) {
                 $skill->update([
-                    'name' => $validated['name'],
+                    'title' => $validated['title'],
                     'level' => $validated['level'],
                 ]);
             });
@@ -102,7 +102,7 @@ class SkillsController extends Controller
 
         try {
             foreach ($request->skills as $skillData) {
-                $skill = Skill::find($skillData['id']);
+                $skill = Skill::where('id',$skillData['id'])->first();
                 if ($skill) {
                     $skill->sort_order = $skillData['sort_order'];
                     $skill->save();
