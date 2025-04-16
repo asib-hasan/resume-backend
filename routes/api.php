@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\EducationController;
+use App\Http\Controllers\SkillsController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -26,4 +27,12 @@ Route::middleware('auth:api')->group(function () {
     Route::put('/educations/{id}', [EducationController::class, 'update']);
     Route::delete('/educations/{id}', [EducationController::class, 'destroy']);
     Route::post('/update/education/order', [EducationController::class, 'sort_order']);
+
+    #skills
+    Route::get('/skills', [SkillsController::class, 'index']);
+    Route::post('/skills', [SkillsController::class, 'store']);
+    Route::put('/skills/{id}', [SkillsController::class, 'update']);
+    Route::delete('/skills/{id}', [SkillsController::class, 'destroy']);
+    Route::post('/update/skill/order', [SkillsController::class, 'sort_order']);
+
 });
