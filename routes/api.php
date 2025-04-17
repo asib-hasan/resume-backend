@@ -6,6 +6,8 @@ use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\SkillsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\InterestController;
+use App\Http\Controllers\PublicationController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -39,5 +41,19 @@ Route::middleware('auth:api')->group(function () {
     Route::put('/skills/{id}', [SkillsController::class, 'update']);
     Route::delete('/skills/{id}', [SkillsController::class, 'destroy']);
     Route::post('/update/skill/order', [SkillsController::class, 'sort_order']);
+
+    #interest
+    Route::get('/interests', [InterestController::class, 'index']);
+    Route::post('/interests', [InterestController::class, 'store']);
+    Route::put('/interests/{id}', [InterestController::class, 'update']);
+    Route::delete('/interests/{id}', [InterestController::class, 'destroy']);
+    Route::post('/update/interest/order', [InterestController::class, 'sort_order']);
+
+    #publication
+    Route::get('/publications', [PublicationController::class, 'index']);
+    Route::post('/publications', [PublicationController::class, 'store']);
+    Route::put('/publications/{id}', [PublicationController::class, 'update']);
+    Route::delete('/publications/{id}', [PublicationController::class, 'destroy']);
+    Route::post('/update/publication/order', [PublicationController::class, 'sort_order']);
 
 });

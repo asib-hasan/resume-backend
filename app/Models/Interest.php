@@ -4,13 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Skill extends Model
+class Interest extends Model
 {
-    protected $table = 'skills';
+    protected $table = 'interest';
     protected $fillable = [
-        'title',
-        'level',
-        'sort_order'
+        'area',
+        'sort_order',
     ];
 
     protected $hidden = [

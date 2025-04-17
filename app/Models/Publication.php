@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Skill extends Model
+class Publication extends Model
 {
-    protected $table = 'skills';
+    protected $table = 'publication';
     protected $fillable = [
-        'title',
-        'level',
-        'sort_order'
+        'details',
+        'link',
+        'year',
+        'sort_order',
     ];
 
     protected $hidden = [
