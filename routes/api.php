@@ -8,6 +8,7 @@ use App\Http\Controllers\SkillsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\InterestController;
 use App\Http\Controllers\PublicationController;
+use App\Http\Controllers\LanguageController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -56,4 +57,10 @@ Route::middleware('auth:api')->group(function () {
     Route::delete('/publications/{id}', [PublicationController::class, 'destroy']);
     Route::post('/update/publication/order', [PublicationController::class, 'sort_order']);
 
+    #language
+    Route::get('/languages', [LanguageController::class, 'index']);
+    Route::post('/languages', [LanguageController::class, 'store']);
+    Route::put('/languages/{id}', [LanguageController::class, 'update']);
+    Route::delete('/languages/{id}', [LanguageController::class, 'destroy']);
+    Route::post('/update/language/order', [LanguageController::class, 'sort_order']);
 });
