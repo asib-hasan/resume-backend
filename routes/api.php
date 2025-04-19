@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\InterestController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\CertificateController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -63,4 +64,11 @@ Route::middleware('auth:api')->group(function () {
     Route::put('/languages/{id}', [LanguageController::class, 'update']);
     Route::delete('/languages/{id}', [LanguageController::class, 'destroy']);
     Route::post('/update/language/order', [LanguageController::class, 'sort_order']);
+
+    #certificate
+    Route::get('/certifications', [CertificateController::class, 'index']);
+    Route::post('/certifications', [CertificateController::class, 'store']);
+    Route::put('/certifications/{id}', [CertificateController::class, 'update']);
+    Route::delete('/certifications/{id}', [CertificateController::class, 'destroy']);
+    Route::post('/update/certification/order', [CertificateController::class, 'sort_order']);
 });

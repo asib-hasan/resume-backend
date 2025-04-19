@@ -51,12 +51,12 @@ class LanguageController extends Controller
         $language = Language::find($id);
 
         if (!$language) {
-            return response()->json(['message' => 'Language not found'], 404);
+            return response()->json(['message' => 'Language information not found'], 404);
         }
 
         $validated = $request->validate([
-            'name' => 'required|string|max:100',
-            'level' => 'required|string|max:100',
+            'name' => 'required|max:10',
+            'level' => 'required|max:10',
         ]);
 
         try {
