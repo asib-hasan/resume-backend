@@ -34,7 +34,7 @@ class CertificateController extends Controller
 
                 Certificate::create([
                     'title' => $validated['title'],
-                    'image' => asset('storage/' . $path),
+                    'image' => $path,
                     'sort_order' => $total + 1,
                 ]);
             });
@@ -58,7 +58,7 @@ class CertificateController extends Controller
         }
 
         $validated = $request->validate([
-            'title' => 'required|string|max:100',
+            'title' => 'required|max:100',
             'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
