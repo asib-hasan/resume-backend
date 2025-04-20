@@ -68,14 +68,12 @@ class CertificateController extends Controller
 
                 if ($request->hasFile('image')) {
                     // Delete old image if exists
-                    $oldPath = str_replace(asset('storage') . '/', '', $certificate->image);
-                    if (Storage::disk('public')->exists($oldPath)) {
-                        Storage::disk('public')->delete($oldPath);
+                    if (Storage::disk('public')->exists($certificate->image)) {
+                        Storage::disk('public')->delete($certificate->image);
                     }
 
-                    // Store new image
                     $path = $request->file('image')->store('certificates', 'public');
-                    $data['image'] = asset('storage/' . $path);
+                    $data['image'] = $path;
                 }
 
                 $certificate->update($data);
@@ -92,6 +90,7 @@ class CertificateController extends Controller
             ], 500);
         }
     }
+
 
     // Delete certificate
     public function destroy($id)
