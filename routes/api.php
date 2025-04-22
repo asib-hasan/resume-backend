@@ -11,6 +11,7 @@ use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\AwardsController;
+use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -81,8 +82,8 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/update/award/order', [AwardsController::class, 'sort_order']);
 
     #award
-    Route::get('/blogs', [AwardsController::class, 'index']);
-    Route::post('/blogs', [AwardsController::class, 'store']);
-    Route::put('/blogs/{id}', [AwardsController::class, 'update']);
-    Route::delete('/blogs/{id}', [AwardsController::class, 'destroy']);
+    Route::get('/blogs', [BlogController::class, 'index']);
+    Route::post('/blogs', [BlogController::class, 'store']);
+    Route::put('/blogs/{id}', [BlogController::class, 'update']);
+    Route::delete('/blogs/{id}', [BlogController::class, 'destroy']);
 });

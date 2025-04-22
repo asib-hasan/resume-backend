@@ -48,6 +48,7 @@ class BlogController extends Controller
                     'date' => $validated['date'],
                     'description' => $validated['description'],
                     'image' => $path,
+                    'status' => 'active',
                 ]);
             });
 
@@ -73,6 +74,7 @@ class BlogController extends Controller
             'category' => 'required|max:150',
             'date' => 'required|date',
             'description' => 'required',
+            'status' => 'required|in:active,inactive',
             'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ], [
             'title.required' => 'Title required.',
@@ -85,6 +87,8 @@ class BlogController extends Controller
             'image.image' => 'Invalid image format.',
             'image.mimes' => 'Image must be jpg, jpeg, png, or webp.',
             'image.max' => 'Image size should not exceed 2MB.',
+            'status.required' => 'Status required.',
+            'status.in' => 'Invalid status.',
         ]);
 
         try {
