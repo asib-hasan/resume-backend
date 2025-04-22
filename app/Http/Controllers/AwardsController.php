@@ -21,7 +21,7 @@ class AwardsController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title' => 'required|string|max:100',
+            'title' => 'required|max:255',
             'status' => 'required|in:active,inactive',
         ]);
 
@@ -55,7 +55,7 @@ class AwardsController extends Controller
         }
 
         $validated = $request->validate([
-            'title' => 'required|string|max:100',
+            'title' => 'required|max:255',
             'status' => 'required|in:active,inactive',
         ]);
 

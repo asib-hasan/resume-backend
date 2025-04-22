@@ -79,4 +79,10 @@ Route::middleware('auth:api')->group(function () {
     Route::put('/awards/{id}', [AwardsController::class, 'update']);
     Route::delete('/awards/{id}', [AwardsController::class, 'destroy']);
     Route::post('/update/award/order', [AwardsController::class, 'sort_order']);
+
+    #award
+    Route::get('/blogs', [AwardsController::class, 'index']);
+    Route::post('/blogs', [AwardsController::class, 'store']);
+    Route::put('/blogs/{id}', [AwardsController::class, 'update']);
+    Route::delete('/blogs/{id}', [AwardsController::class, 'destroy']);
 });
