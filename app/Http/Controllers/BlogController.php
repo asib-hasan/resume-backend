@@ -17,6 +17,13 @@ class BlogController extends Controller
         ], 200);
     }
 
+    public function get_single($id){
+        return response()->json([
+            'status' => 'success',
+            'data' => Blog::where('id', $id)->first()
+        ],200);
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([

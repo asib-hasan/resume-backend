@@ -83,6 +83,7 @@ Route::middleware('auth:api')->group(function () {
 
     #award
     Route::get('/blogs', [BlogController::class, 'index']);
+    Route::get('/single/blog/{id}', [BlogController::class, 'get_single']);
     Route::post('/blogs', [BlogController::class, 'store']);
     Route::put('/blogs/{id}', [BlogController::class, 'update']);
     Route::delete('/blogs/{id}', [BlogController::class, 'destroy']);
