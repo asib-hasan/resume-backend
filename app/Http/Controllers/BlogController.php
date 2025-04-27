@@ -17,12 +17,23 @@ class BlogController extends Controller
         ], 200);
     }
 
-    public function get_single($id){
+    public function get_single($id)
+    {
+        $blog = Blog::find($id);
+
+        if (!$blog) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Blog not found.'
+            ], 404);
+        }
+
         return response()->json([
             'status' => 'success',
-            'data' => Blog::where('id', $id)->first()
-        ],200);
+            'data' => $blog
+        ], 200);
     }
+
 
     public function store(Request $request)
     {

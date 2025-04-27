@@ -81,7 +81,7 @@ Route::middleware('auth:api')->group(function () {
     Route::delete('/awards/{id}', [AwardsController::class, 'destroy']);
     Route::post('/update/award/order', [AwardsController::class, 'sort_order']);
 
-    #award
+    #blog
     Route::get('/blogs', [BlogController::class, 'index']);
     Route::get('/single/blog/{id}', [BlogController::class, 'get_single']);
     Route::post('/blogs', [BlogController::class, 'store']);
