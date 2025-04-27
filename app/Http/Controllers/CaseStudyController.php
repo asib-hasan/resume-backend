@@ -19,9 +19,9 @@ class CaseStudyController extends Controller
 
     public function get_single($id)
     {
-        $blog = CaseStudy::find($id);
+        $case_study = CaseStudy::find($id);
 
-        if (!$blog) {
+        if (!$case_study) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'CaseStudy not found.'
@@ -30,7 +30,7 @@ class CaseStudyController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'data' => $blog
+            'data' => $case_study
         ], 200);
     }
 
@@ -58,7 +58,7 @@ class CaseStudyController extends Controller
 
         try {
             DB::transaction(function () use ($request, $validated) {
-                $path = $request->hasFile('image') ? $request->file('image')->store('blogs', 'public') : null;
+                $path = $request->hasFile('image') ? $request->file('image')->store('case_study', 'public') : null;
 
                 CaseStudy::create([
                     'title' => $validated['title'],
@@ -70,10 +70,10 @@ class CaseStudyController extends Controller
                 ]);
             });
 
-            return response()->json(['message' => 'CaseStudy created successfully!'], 201);
+            return response()->json(['message' => 'Case study created successfully!'], 201);
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'Failed to create CaseStudy.',
+                'message' => 'Failed to create Case study.',
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -81,10 +81,10 @@ class CaseStudyController extends Controller
 
     public function update(Request $request, $id)
     {
-        $blog = CaseStudy::find($id);
+        $case_study = CaseStudy::find($id);
 
-        if (!$blog) {
-            return response()->json(['message' => 'CaseStudy information not found'], 404);
+        if (!$case_study) {
+            return response()->json(['message' => 'Case study information not found'], 404);
         }
 
         $validated = $request->validate([
@@ -107,7 +107,7 @@ class CaseStudyController extends Controller
         ]);
 
         try {
-            DB::transaction(function () use ($request, $validated, $blog) {
+            DB::transaction(function () use ($request, $validated, $case_study) {
                 $data = [
                     'title' => $validated['title'],
                     'category' => $validated['category'],
@@ -116,23 +116,23 @@ class CaseStudyController extends Controller
                 ];
 
                 if ($request->hasFile('image')) {
-                    if ($blog->image && Storage::disk('public')->exists($blog->image)) {
-                        Storage::disk('public')->delete($blog->image);
+                    if ($case_study->image && Storage::disk('public')->exists($case_study->image)) {
+                        Storage::disk('public')->delete($case_study->image);
                     }
 
-                    $data['image'] = $request->file('image')->store('blogs', 'public');
+                    $data['image'] = $request->file('image')->store('case_study', 'public');
                 }
 
-                $blog->update($data);
+                $case_study->update($data);
             });
 
             return response()->json([
-                'message' => 'CaseStudy updated successfully!',
-                'data' => $blog
+                'message' => 'Case study updated successfully!',
+                'data' => $case_study
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'Failed to update CaseStudy.',
+                'message' => 'Failed to update Case study.',
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -140,25 +140,25 @@ class CaseStudyController extends Controller
 
     public function destroy($id)
     {
-        $blog = CaseStudy::find($id);
+        $case_study = CaseStudy::find($id);
 
-        if (!$blog) {
-            return response()->json(['message' => 'CaseStudy not found'], 404);
+        if (!$case_study) {
+            return response()->json(['message' => 'Case study not found'], 404);
         }
 
         try {
-            DB::transaction(function () use ($blog) {
-                if ($blog->image && Storage::disk('public')->exists($blog->image)) {
-                    Storage::disk('public')->delete($blog->image);
+            DB::transaction(function () use ($case_study) {
+                if ($case_study->image && Storage::disk('public')->exists($case_study->image)) {
+                    Storage::disk('public')->delete($case_study->image);
                 }
 
-                $blog->delete();
+                $case_study->delete();
             });
 
-            return response()->json(['message' => 'CaseStudy deleted successfully!'], 200);
+            return response()->json(['message' => 'Case study deleted successfully!'], 200);
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'Failed to delete CaseStudy.',
+                'message' => 'Failed to delete Case study.',
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -167,10 +167,10 @@ class CaseStudyController extends Controller
 
     public function update_status(Request $request, $id)
     {
-        $blog = CaseStudy::find($id);
+        $case_study = CaseStudy::find($id);
 
-        if (!$blog) {
-            return response()->json(['message' => 'CaseStudy information not found'], 404);
+        if (!$case_study) {
+            return response()->json(['message' => 'Case study information not found'], 404);
         }
 
         $validated = $request->validate([
@@ -180,21 +180,21 @@ class CaseStudyController extends Controller
         ]);
 
         try {
-            DB::transaction(function () use ($request, $validated, $blog) {
+            DB::transaction(function () use ($request, $validated, $case_study) {
                 $data = [
                     'status' => $validated['status'],
                 ];
 
-                $blog->update($data);
+                $case_study->update($data);
             });
 
             return response()->json([
-                'message' => 'CaseStudy updated successfully!',
-                'data' => $blog
+                'message' => 'Case study updated successfully!',
+                'data' => $case_study
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'Failed to update CaseStudy.',
+                'message' => 'Failed to update Case study.',
                 'error' => $e->getMessage()
             ], 500);
         }

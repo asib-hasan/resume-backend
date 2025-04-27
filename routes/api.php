@@ -12,6 +12,7 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\AwardsController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CaseStudyController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -88,4 +89,12 @@ Route::middleware('auth:api')->group(function () {
     Route::put('/blogs/{id}', [BlogController::class, 'update']);
     Route::put('/blogs/update/status/{id}', [BlogController::class, 'update_status']);
     Route::delete('/blogs/{id}', [BlogController::class, 'destroy']);
+
+    #case study
+    Route::get('/cs', [CaseStudyController::class, 'index']);
+    Route::get('/single/cs/{id}', [CaseStudyController::class, 'get_single']);
+    Route::post('/cs', [CaseStudyController::class, 'store']);
+    Route::put('/cs/{id}', [CaseStudyController::class, 'update']);
+    Route::put('/cs/update/status/{id}', [CaseStudyController::class, 'update_status']);
+    Route::delete('/cs/{id}', [CaseStudyController::class, 'destroy']);
 });
