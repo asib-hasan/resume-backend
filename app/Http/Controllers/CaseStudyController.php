@@ -2,29 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Blog;
+use App\Models\CaseStudy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
-class BlogController extends Controller
+class CaseStudyController extends Controller
 {
     public function index()
     {
         return response()->json([
             'status' => 'success',
-            'data' => Blog::orderBy('sort_order')->get()
+            'data' => CaseStudy::orderBy('sort_order')->get()
         ], 200);
     }
 
     public function get_single($id)
     {
-        $blog = Blog::find($id);
+        $blog = CaseStudy::find($id);
 
         if (!$blog) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Blog not found.'
+                'message' => 'CaseStudy not found.'
             ], 404);
         }
 
@@ -60,7 +60,7 @@ class BlogController extends Controller
             DB::transaction(function () use ($request, $validated) {
                 $path = $request->hasFile('image') ? $request->file('image')->store('blogs', 'public') : null;
 
-                Blog::create([
+                CaseStudy::create([
                     'title' => $validated['title'],
                     'category' => $validated['category'],
                     'date' => $validated['date'],
@@ -70,10 +70,10 @@ class BlogController extends Controller
                 ]);
             });
 
-            return response()->json(['message' => 'Blog created successfully!'], 201);
+            return response()->json(['message' => 'CaseStudy created successfully!'], 201);
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'Failed to create blog.',
+                'message' => 'Failed to create CaseStudy.',
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -81,10 +81,10 @@ class BlogController extends Controller
 
     public function update(Request $request, $id)
     {
-        $blog = Blog::find($id);
+        $blog = CaseStudy::find($id);
 
         if (!$blog) {
-            return response()->json(['message' => 'Blog information not found'], 404);
+            return response()->json(['message' => 'CaseStudy information not found'], 404);
         }
 
         $validated = $request->validate([
@@ -127,12 +127,12 @@ class BlogController extends Controller
             });
 
             return response()->json([
-                'message' => 'Blog updated successfully!',
+                'message' => 'CaseStudy updated successfully!',
                 'data' => $blog
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'Failed to update blog.',
+                'message' => 'Failed to update CaseStudy.',
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -140,10 +140,10 @@ class BlogController extends Controller
 
     public function destroy($id)
     {
-        $blog = Blog::find($id);
+        $blog = CaseStudy::find($id);
 
         if (!$blog) {
-            return response()->json(['message' => 'Blog not found'], 404);
+            return response()->json(['message' => 'CaseStudy not found'], 404);
         }
 
         try {
@@ -155,10 +155,10 @@ class BlogController extends Controller
                 $blog->delete();
             });
 
-            return response()->json(['message' => 'Blog deleted successfully!'], 200);
+            return response()->json(['message' => 'CaseStudy deleted successfully!'], 200);
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'Failed to delete blog.',
+                'message' => 'Failed to delete CaseStudy.',
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -167,10 +167,10 @@ class BlogController extends Controller
 
     public function update_status(Request $request, $id)
     {
-        $blog = Blog::find($id);
+        $blog = CaseStudy::find($id);
 
         if (!$blog) {
-            return response()->json(['message' => 'Blog information not found'], 404);
+            return response()->json(['message' => 'CaseStudy information not found'], 404);
         }
 
         $validated = $request->validate([
@@ -189,12 +189,12 @@ class BlogController extends Controller
             });
 
             return response()->json([
-                'message' => 'Blog updated successfully!',
+                'message' => 'CaseStudy updated successfully!',
                 'data' => $blog
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'Failed to update blog.',
+                'message' => 'Failed to update CaseStudy.',
                 'error' => $e->getMessage()
             ], 500);
         }
