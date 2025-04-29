@@ -97,4 +97,5 @@ Route::middleware('auth:api')->group(function () {
     Route::put('/cs/{id}', [CaseStudyController::class, 'update']);
     Route::put('/cs/update/status/{id}', [CaseStudyController::class, 'update_status']);
     Route::delete('/cs/{id}', [CaseStudyController::class, 'destroy']);
+
 });
