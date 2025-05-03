@@ -13,6 +13,7 @@ use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\AwardsController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CaseStudyController;
+use App\Http\Controllers\AIController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -98,4 +99,6 @@ Route::middleware('auth:api')->group(function () {
     Route::put('/cs/update/status/{id}', [CaseStudyController::class, 'update_status']);
     Route::delete('/cs/{id}', [CaseStudyController::class, 'destroy']);
 
+    #ai request
+    Route::get('/ask/openai',[AIController::class,'askOpenAI']);
 });
