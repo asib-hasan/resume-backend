@@ -14,6 +14,7 @@ class AIController extends Controller
             return response()->json(['error' => 'Prompt required.'], 422);
         }
 
+
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . config('services.openrouter.api_key'),
             'Content-Type' => 'application/json',
